@@ -50,7 +50,7 @@ const KeyboardDetail: NextPage<KeyboardDetailProps> = ({
           {p["is_official"] ? (
             <Image
               src="https://images.tokopedia.net/img/official_store/badge_os.png"
-              alt="mpBagde"
+              alt="mpBadge"
               width={15}
               height={15}
             />
@@ -63,6 +63,20 @@ const KeyboardDetail: NextPage<KeyboardDetailProps> = ({
   return (
     <ContentLayout>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="flex flex-row gap-2 ">
+          <Image
+            src={keyboard.imageUrl}
+            alt="kbImage"
+            width={200}
+            height={200}
+          />
+          <div className="flex flex-col justify-between p-5 font-bold bg-white dark:bg-gray-700 grow">
+            <span className="text-4xl text-white">{keyboard.name}</span>
+            <span className="text-5xl text-gray-300">
+              {keyboardPrices[0]["price"]}
+            </span>
+          </div>
+        </div>
         <table className="w-full text-sm text-left text-gray-500 table-fixed dark:text-gray-400">
           <tbody>
             {Object.entries(header).map(([key]) => (

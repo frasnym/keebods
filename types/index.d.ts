@@ -19,4 +19,5 @@ export type Keyboard = {
   stabilizer: string;
   warranty: string;
   prices?: string;
+  imageUrl: string;
 };

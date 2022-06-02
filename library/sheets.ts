@@ -42,6 +42,7 @@ export async function getKeyboardData(): Promise<Keyboard[]> {
           warranty: row[17],
           prices: row[18],
           slug: slugify(row[0]),
+          imageUrl: row[19],
         };
       });
     }
