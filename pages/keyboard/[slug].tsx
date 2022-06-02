@@ -22,8 +22,7 @@ const KeyboardDetail: NextPage<KeyboardDetailProps> = ({
   const router = useRouter();
   const { slug } = router.query;
 
-  const keyboard = keyboards.find((kb) => kb.slug === slug);
-
+  const keyboard = keyboards ? keyboards.find((kb) => kb.slug === slug) : null;
   if (!keyboard) return <p>Keyboard not found</p>;
 
   const keyboardPrices = JSON.parse(keyboard.prices!) as Array<any>;

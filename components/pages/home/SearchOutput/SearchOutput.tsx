@@ -16,7 +16,7 @@ const SearchOutput: NextPage<SearchOutputProps> = ({ filteredKeyboards }) => {
             aria-labelledby="dropdown-button"
           >
             {filteredKeyboards.map((kb) => (
-              <li key={kb.links}>
+              <li key={kb.slug}>
                 <Link href={`keyboard/${kb.slug}`}>
                   <a className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                     {kb.name}
