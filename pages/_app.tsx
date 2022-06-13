@@ -15,7 +15,7 @@ function App({ Component, pageProps }: AppProps) {
 App.getInitialProps = async () => {
   console.log("Running getInitialProps App");
 
-  let pageProps: AppContextInterface = { header: [], data: [] };
+  let pageProps: AppContextInterface = { header: [], data: {} };
 
   try {
     pageProps = await getKeyboardData();
