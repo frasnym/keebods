@@ -19,5 +19,10 @@ export type Keyboard = {
   stabilizer: string;
   warranty: string;
   prices?: string;
-  imageUrl: string;
+  imageUrl?: string;
 };
+
+export interface AppContextInterface {
+  header: string[];
+  data: Keyboard[];
+}
