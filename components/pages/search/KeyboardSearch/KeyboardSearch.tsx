@@ -5,7 +5,11 @@ import { Keyboard } from "../../../../types";
 import { SearchInput } from "../SearchInput";
 import { SearchOutput } from "../SearchOutput";
 
-const KeyboardSearch: NextPage = () => {
+interface Props {
+  urlMap: string;
+}
+
+const KeyboardSearch: NextPage<Props> = (props) => {
   const ctxValue = useContext(AppContext);
   const keyboardsRaw = ctxValue!.data;
 
@@ -33,7 +37,10 @@ const KeyboardSearch: NextPage = () => {
         defaultValue={searchInput}
         onChangeFn={(v: string) => setSearchInput(v)}
       />
-      <SearchOutput filteredKeyboards={filteredKeyboards} />
+      <SearchOutput
+        urlMap={props.urlMap}
+        filteredKeyboards={filteredKeyboards}
+      />
     </div>
   );
 };

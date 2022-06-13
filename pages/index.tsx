@@ -5,7 +5,7 @@ const Home: NextPage = () => {
   return (
     <div className="bg-white dark:bg-gray-900">
       <div className="flex items-center justify-center h-screen">
-        <KeyboardSearch />
+        <KeyboardSearch urlMap="/keyboard/{slug}" />
       </div>
     </div>
   );
