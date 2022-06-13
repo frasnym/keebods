@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { useContext } from "react";
 import AppContext from "../../../../library/context";
 import { Keyboard } from "../../../../types";
@@ -29,10 +30,18 @@ const DetailTable: NextPage<Props> = (props) => {
           height={200}
         />
         <div className="flex flex-col justify-between p-5 font-bold bg-white dark:bg-gray-700 grow">
-          <span className="text-4xl text-white">{props.keyboard.name}</span>
-          <span className="text-5xl text-gray-300">
+          <span className="text-3xl text-white">{props.keyboard.name}</span>
+          <span className="text-4xl text-right text-gray-300">
             {keyboardPrices[0]["price"]}
           </span>
+          <Link
+            href={`/keyboard/compare?slugs=["${props.keyboard.slug}"]`}
+            shallow={true}
+          >
+            <a className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-center">
+              Compare this keyboard
+            </a>
+          </Link>
         </div>
       </div>
       <table className="w-full text-sm text-left text-gray-500 table-fixed dark:text-gray-400">

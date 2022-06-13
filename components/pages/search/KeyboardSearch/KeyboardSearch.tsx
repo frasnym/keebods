@@ -40,6 +40,7 @@ const KeyboardSearch: NextPage<Props> = (props) => {
       <SearchOutput
         urlMap={props.urlMap}
         filteredKeyboards={filteredKeyboards}
+        onClickFn={() => setSearchInput("")}
       />
     </div>
   );

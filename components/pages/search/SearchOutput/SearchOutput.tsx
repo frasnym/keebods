@@ -5,6 +5,7 @@ import { Keyboard } from "../../../../types";
 interface Props {
   filteredKeyboards: Keyboard[];
   urlMap: string;
+  onClickFn: () => void;
 }
 
 const SearchOutput: NextPage<Props> = (props) => {
@@ -22,7 +23,10 @@ const SearchOutput: NextPage<Props> = (props) => {
                   href={props.urlMap.replace("{slug}", kb.slug!)}
                   shallow={true}
                 >
-                  <a className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  <a
+                    onClick={props.onClickFn}
+                    className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >
                     {kb.name}
                   </a>
                 </Link>
