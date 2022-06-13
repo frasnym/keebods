@@ -17,7 +17,7 @@ const SearchOutput: NextPage<SearchOutputProps> = ({ filteredKeyboards }) => {
           >
             {filteredKeyboards.map((kb) => (
               <li key={kb.slug}>
-                <Link href={`keyboard/${kb.slug}`}>
+                <Link href={`/keyboard/${kb.slug}`} shallow={true}>
                   <a className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                     {kb.name}
                   </a>

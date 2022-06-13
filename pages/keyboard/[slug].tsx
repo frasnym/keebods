@@ -1,29 +1,30 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import { ContentLayout } from "../../components/layouts/ContentLayout";
 import { ToolTip } from "../../components/ui/ToolTip";
+import AppContext from "../../library/context";
 import { getKeyboardData } from "../../library/sheets";
-import { Keyboard } from "../../types";
+import { AppContextInterface } from "../../types";
 
-interface KeyboardDetailProps {
-  keyboards: Keyboard[];
-  header: Keyboard;
-}
-
-interface UpdatedKeyboard {
-  [key: string]: any;
-}
-
-const KeyboardDetail: NextPage<KeyboardDetailProps> = ({
-  keyboards,
-  header,
-}) => {
+const KeyboardDetail: NextPage = () => {
   const router = useRouter();
+  const value = useContext(AppContext);
+
+  const exitComponent = <p>Keyboard not found</p>;
+
+  if (!value) {
+    console.log("value not found", value);
+    return exitComponent;
+  }
+
   const { slug } = router.query;
+  const keyboards = value?.data;
+  const header = value?.header;
 
   const keyboard = keyboards ? keyboards.find((kb) => kb.slug === slug) : null;
-  if (!keyboard) return <p>Keyboard not found</p>;
+  if (!keyboard) return exitComponent;
 
   const keyboardPrices = JSON.parse(keyboard.prices!) as Array<any>;
   const mpBtnColor: { [key: string]: string } = {
@@ -60,12 +61,17 @@ const KeyboardDetail: NextPage<KeyboardDetailProps> = ({
     </div>
   ));
 
+  const kbCopy = { ...keyboard };
+  delete kbCopy.prices;
+  delete kbCopy.slug;
+  delete kbCopy.imageUrl;
+
   return (
     <ContentLayout>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="flex flex-row gap-2 ">
           <Image
-            src={keyboard.imageUrl}
+            src={keyboard.imageUrl!}
             alt="kbImage"
             width={200}
             height={200}
@@ -79,20 +85,18 @@ const KeyboardDetail: NextPage<KeyboardDetailProps> = ({
         </div>
         <table className="w-full text-sm text-left text-gray-500 table-fixed dark:text-gray-400">
           <tbody>
-            {Object.entries(header).map(([key]) => (
+            {Object.values(kbCopy).map((kb, index) => (
               <tr
-                key={key}
+                key={`${kb}${index}`}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
                 >
-                  {(header as unknown as UpdatedKeyboard)[key]}
+                  {header![index]}
                 </th>
-                <td className="px-6 py-4 break-words">
-                  {(keyboard as unknown as UpdatedKeyboard)[key]}
-                </td>
+                <td className="px-6 py-4 break-words">{kb}</td>
               </tr>
             ))}
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -111,35 +115,18 @@ const KeyboardDetail: NextPage<KeyboardDetailProps> = ({
   );
 };
 
-export async function getStaticPaths() {
-  const keyboards = await getKeyboardData();
+export async function getServerSideProps() {
+  console.log("Running getServerSideProps Slug");
 
-  const paths = keyboards.map((kb) => ({
-    params: { slug: kb.slug },
-  }));
+  let pageProps: AppContextInterface = { header: [], data: [] };
 
-  return {
-    paths,
-    fallback: true, // false or 'blocking'
-  };
-}
-
-export async function getStaticProps() {
   try {
-    const keyboards = await getKeyboardData();
-    const header = keyboards[0];
-    delete header.slug;
-    delete header.prices;
+    pageProps = await getKeyboardData();
 
-    return {
-      props: {
-        keyboards: keyboards.slice(1, keyboards.length), // remove sheet header
-        header,
-      },
-      revalidate: 30, // In seconds
-    };
+    return { props: pageProps };
   } catch (error) {
     console.error("Unable to get data", error);
+    return { props: pageProps };
   }
 }
 
