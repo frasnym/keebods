@@ -2,10 +2,10 @@ import type { NextPage } from "next";
 import { useContext, useEffect, useState } from "react";
 import AppContext from "../../../../library/context";
 import { Keyboard } from "../../../../types";
-import { SearchInput } from "../../home/SearchInput";
-import { SearchOutput } from "../../home/SearchOutput";
+import { SearchInput } from "../SearchInput";
+import { SearchOutput } from "../SearchOutput";
 
-const SearchKeyboard: NextPage = () => {
+const KeyboardSearch: NextPage = () => {
   const ctxValue = useContext(AppContext);
   const keyboardsRaw = ctxValue!.data;
 
@@ -38,4 +38,4 @@ const SearchKeyboard: NextPage = () => {
   );
 };
 
-export default SearchKeyboard;
+export default KeyboardSearch;
