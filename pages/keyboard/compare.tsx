@@ -2,36 +2,32 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { ContentLayout } from "../../components/layouts/ContentLayout";
-import { DetailTable } from "../../components/pages/table/DetailTable";
+import { CompareTable } from "../../components/pages/table/CompareTable";
 import AppContext from "../../library/context";
 import { getKeyboardData } from "../../library/sheets";
 import { AppContextInterface } from "../../types";
 
-const KeyboardDetail: NextPage = () => {
+const CompareKeyboard: NextPage = () => {
   const router = useRouter();
-  const value = useContext(AppContext);
+  const ctxValue = useContext(AppContext);
+  if (!ctxValue) return null;
 
-  const exitComponent = <p>Keyboard not found</p>;
+  console.log(ctxValue);
 
-  if (!value) return exitComponent;
-
-  const slug = router.query.slug as string;
-  const keyboards = value?.data;
-
-  const keyboard = keyboards[slug];
-  if (!keyboard) return exitComponent;
+  const slugs = JSON.parse(router.query.slugs as string) as string[];
 
   return (
     <ContentLayout>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <DetailTable keyboard={keyboard} />
-      </div>
+      <CompareTable
+        keyboard={slugs.map((s) => ctxValue.data[s])}
+        comparedSlugs={slugs}
+      />
     </ContentLayout>
   );
 };
 
 export async function getServerSideProps() {
-  console.log("Running getServerSideProps KeyboardDetail");
+  console.log("Running getServerSideProps CompareKeyboard");
 
   let pageProps: AppContextInterface = { header: [], data: {} };
 
@@ -45,4 +41,4 @@ export async function getServerSideProps() {
   }
 }
 
-export default KeyboardDetail;
+export default CompareKeyboard;
