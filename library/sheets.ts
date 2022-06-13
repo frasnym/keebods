@@ -1,9 +1,10 @@
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import slugify from "react-slugify";
-import { AppContextInterface } from "../types/index";
+import { AppContextInterface, Keyboard, KeyboardsObject } from "../types/index";
 
 export async function getKeyboardData(): Promise<AppContextInterface> {
-  if (!process.env.GOOGLE_SHEETS_CLIENT_EMAIL) return { header: [], data: [] };
+  const nullResult = { header: [], data: {} };
+  if (!process.env.GOOGLE_SHEETS_CLIENT_EMAIL) return nullResult;
 
   try {
     // Initialize the sheet - doc ID is the long id in the sheets URL
@@ -27,9 +28,10 @@ export async function getKeyboardData(): Promise<AppContextInterface> {
     // read rows
     const rows = await sheet.getRows(); // can pass in { limit, offset }
 
-    return {
-      header: sheet.headerValues,
-      data: rows.map((row) => ({
+    // convert raw data
+    const keyboardsObj: KeyboardsObject = {};
+    rows.forEach((row) => {
+      const kb: Keyboard = {
         name: row["Name"],
         keys: row["Keys"],
         material: row["Material"],
@@ -51,10 +53,17 @@ export async function getKeyboardData(): Promise<AppContextInterface> {
         prices: row["Prices"],
         imageUrl: row["Image"],
         slug: slugify(row["Name"]),
-      })),
+      };
+
+      keyboardsObj[kb.slug!] = kb;
+    });
+
+    return {
+      header: sheet.headerValues,
+      data: keyboardsObj,
     };
   } catch (error) {
     console.error(error);
-    return { header: [], data: [] };
+    return nullResult;
   }
 }

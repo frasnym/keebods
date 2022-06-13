@@ -22,7 +22,11 @@ export type Keyboard = {
   imageUrl?: string;
 };
 
+export type KeyboardsObject = {
+  [key: string]: Keyboard;
+};
+
 export interface AppContextInterface {
   header: string[];
-  data: Keyboard[];
+  data: KeyboardsObject;
 }
