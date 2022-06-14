@@ -38,6 +38,7 @@ const KeyboardSearch: NextPage<Props> = (props) => {
         onChangeFn={(v: string) => setSearchInput(v)}
       />
       <SearchOutput
+        keyword={searchInput}
         urlMap={props.urlMap}
         filteredKeyboards={filteredKeyboards}
         onClickFn={() => setSearchInput("")}
