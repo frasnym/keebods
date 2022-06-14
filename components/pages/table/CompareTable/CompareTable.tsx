@@ -50,7 +50,7 @@ const CompareTable: NextPage<Props> = (props) => {
           <td className="px-6 py-4">
             <KeyboardSearch urlMap={generateUrl(1)} />
           </td>
-          <td className="px-6 py-4">
+          <td className="hidden px-6 py-4 sm:block">
             <KeyboardSearch urlMap={generateUrl(2)} />
           </td>
         </tr>
@@ -79,7 +79,7 @@ const CompareTable: NextPage<Props> = (props) => {
           >
             <th
               scope="row"
-              className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
+              className="px-6 py-4 font-medium text-gray-900 break-words dark:text-white"
             >
               {ctxValue.header[index]}
             </th>
@@ -122,7 +122,7 @@ function generatePricesElement(keyboardPrices: Array<any>): JSX.Element[] {
   return keyboardPrices.map((p) => (
     <div
       key={p["url"]}
-      className="flex flex-row items-center justify-between mb-4 last:mb-0"
+      className="flex flex-col items-center justify-between mb-4 md:flex-row last:mb-0"
     >
       <span>{p["price"]}</span>
       <ToolTip message={`Updated: ${p["created_at"]}`}>

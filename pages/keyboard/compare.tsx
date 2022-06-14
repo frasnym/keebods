@@ -12,8 +12,6 @@ const CompareKeyboard: NextPage = () => {
   const ctxValue = useContext(AppContext);
   if (!ctxValue) return null;
 
-  console.log(ctxValue);
-
   const slugs = JSON.parse(router.query.slugs as string) as string[];
 
   return (
