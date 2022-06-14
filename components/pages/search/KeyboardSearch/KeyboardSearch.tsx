@@ -32,12 +32,13 @@ const KeyboardSearch: NextPage<Props> = (props) => {
   }, [searchInput, keyboardsRaw]);
 
   return (
-    <div className="flex flex-col">
+    <div className="relative flex flex-col">
       <SearchInput
         defaultValue={searchInput}
         onChangeFn={(v: string) => setSearchInput(v)}
       />
       <SearchOutput
+        keyword={searchInput}
         urlMap={props.urlMap}
         filteredKeyboards={filteredKeyboards}
         onClickFn={() => setSearchInput("")}

@@ -5,6 +5,10 @@ import { KeyboardSearch } from "../../pages/search/KeyboardSearch";
 
 const urls = [
   {
+    label: "Home",
+    url: "/",
+  },
+  {
     label: "Report",
     url: "/report",
   },
