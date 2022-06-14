@@ -30,3 +30,24 @@ export interface AppContextInterface {
   header: string[];
   data: KeyboardsObject;
 }
+
+export interface FormGroupProps {
+  inputKey: string;
+  label: {
+    text: string;
+  };
+  input?: {
+    type: "text" | "email";
+    placeholder: string;
+    required: boolean;
+  };
+  select?: {
+    placeholder: string;
+    required: boolean;
+    options: {
+      value: string;
+      text: string;
+    }[];
+  };
+  helperText?: React.ReactNode;
+}
