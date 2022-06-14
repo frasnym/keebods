@@ -10,7 +10,7 @@ interface Props {
 
 const SearchOutput: NextPage<Props> = (props) => {
   return (
-    <>
+    <div className="absolute w-full mt-10">
       {props.filteredKeyboards.length > 0 ? (
         <div className="z-10 w-full bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700">
           <ul
@@ -35,7 +35,7 @@ const SearchOutput: NextPage<Props> = (props) => {
           </ul>
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 
