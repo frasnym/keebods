@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { Footer } from "../components/layouts/Footer";
+import { Menu } from "../components/layouts/Menu";
 import { KeyboardSearch } from "../components/pages/search/KeyboardSearch";
 
 const Home: NextPage = () => {
@@ -14,6 +15,8 @@ const Home: NextPage = () => {
             Mechanical Keyboard Database
           </h2>
           <KeyboardSearch urlMap="/keyboard/{slug}" />
+          <br className="py-5" />
+          <Menu />
         </div>
         <div className="w-full">
           <Footer />
