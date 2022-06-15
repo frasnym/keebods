@@ -2,18 +2,18 @@ import type { NextPage } from "next";
 import Link from "next/link";
 
 const urls = [
-  {
-    label: "Home",
-    url: "/",
-  },
+  // {
+  //   label: "Home",
+  //   url: "/",
+  // },
   {
     label: "Report",
     url: "/report",
   },
-  {
-    label: "Contact",
-    url: "/contact",
-  },
+  // {
+  //   label: "Contact",
+  //   url: "/contact",
+  // },
 ];
 
 const Menu: NextPage = () => {
