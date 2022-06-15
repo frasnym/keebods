@@ -3,6 +3,8 @@ import { useState } from "react";
 import { ContentLayout } from "../components/layouts/ContentLayout";
 import { AddNewData } from "../components/pages/report/AddNewData";
 import { EditExistingData } from "../components/pages/report/EditExistingData";
+import { getKeyboardData } from "../library/sheets";
+import { AppContextInterface } from "../types";
 
 const tabsData = [
   {
@@ -83,5 +85,20 @@ const Report: NextPage = () => {
     </ContentLayout>
   );
 };
+
+export async function getServerSideProps() {
+  console.log("Running getServerSideProps Report");
+
+  let pageProps: AppContextInterface = { header: [], data: {} };
+
+  try {
+    pageProps = await getKeyboardData();
+
+    return { props: pageProps };
+  } catch (error) {
+    console.error("Unable to get data", error);
+    return { props: pageProps };
+  }
+}
 
 export default Report;
