@@ -17,7 +17,7 @@ type LooseKeyboard = {
 const CompareTable: NextPage<Props> = (props) => {
   const headers = useKeyboard((state) => state.header);
 
-  const kbMap = { ...props.keyboard[0] };
+  const kbMap: Partial<Keyboard> = { ...props.keyboard[0] };
   delete kbMap.prices;
   delete kbMap.imageUrl;
   delete kbMap.slug;
@@ -60,7 +60,7 @@ const CompareTable: NextPage<Props> = (props) => {
             <td key={`${kb.name}${kb.imageUrl}${i++}`} className="px-6 py-4">
               {
                 <Image
-                  src={kb.imageUrl!}
+                  src={kb.imageUrl}
                   alt="kbImage"
                   width={200}
                   height={200}

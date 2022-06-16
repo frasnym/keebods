@@ -14,7 +14,7 @@ const DetailTable: NextPage<Props> = (props) => {
 
   const keyboardPrices = JSON.parse(props.keyboard.prices!) as Array<any>;
 
-  const kbCopy = { ...props.keyboard };
+  const kbCopy: Partial<Keyboard> = { ...props.keyboard };
   delete kbCopy.prices;
   delete kbCopy.imageUrl;
 
