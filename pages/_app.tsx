@@ -5,6 +5,7 @@ import { useEffect } from "react";
 
 function App({ Component, pageProps }: AppProps) {
   const setIsLoading = useKeyboard((state) => state.setIsLoading);
+  const isLoading = useKeyboard((state) => state.isLoading);
   const initData = useKeyboard((state) => state.initData);
   const header = useKeyboard((state) => state.header);
 
@@ -18,7 +19,7 @@ function App({ Component, pageProps }: AppProps) {
       setIsLoading(false);
     }
 
-    if (header.length <= 0) initKeyboardStore();
+    if (header.length <= 0 && isLoading === false) initKeyboardStore();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
