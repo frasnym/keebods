@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import Image from "next/image";
-import { useContext } from "react";
-import AppContext from "../../../../library/context";
+import useKeyboard from "../../../../store/store";
 import { Keyboard } from "../../../../types";
 import { ToolTip } from "../../../ui/ToolTip";
 import { KeyboardSearch } from "../../search/KeyboardSearch";
@@ -16,9 +15,7 @@ type LooseKeyboard = {
 };
 
 const CompareTable: NextPage<Props> = (props) => {
-  const ctxValue = useContext(AppContext);
-
-  if (!ctxValue) return null;
+  const headers = useKeyboard((state) => state.header);
 
   const kbMap = { ...props.keyboard[0] };
   delete kbMap.prices;
@@ -81,7 +78,7 @@ const CompareTable: NextPage<Props> = (props) => {
               scope="row"
               className="px-6 py-4 font-medium text-gray-900 break-words dark:text-white"
             >
-              {ctxValue.header[index]}
+              {headers[index]}
             </th>
             {props.keyboard.map((kb) => (
               <td

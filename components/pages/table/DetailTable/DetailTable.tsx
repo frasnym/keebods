@@ -1,8 +1,7 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext } from "react";
-import AppContext from "../../../../library/context";
+import useKeyboard from "../../../../store/store";
 import { Keyboard } from "../../../../types";
 import { ToolTip } from "../../../ui/ToolTip";
 
@@ -11,8 +10,7 @@ interface Props {
 }
 
 const DetailTable: NextPage<Props> = (props) => {
-  const ctxValue = useContext(AppContext);
-  if (!ctxValue) return null;
+  const headers = useKeyboard((state) => state.header);
 
   const keyboardPrices = JSON.parse(props.keyboard.prices!) as Array<any>;
 
@@ -55,7 +53,7 @@ const DetailTable: NextPage<Props> = (props) => {
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
               >
-                {ctxValue.header[index]}
+                {headers[index]}
               </th>
               <td className="px-6 py-4 break-words">{kb}</td>
             </tr>

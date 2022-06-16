@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import { useContext, useEffect, useState } from "react";
-import AppContext from "../../../../library/context";
+import { useEffect, useState } from "react";
+import useKeyboard from "../../../../store/store";
 import { Keyboard } from "../../../../types";
 import { SearchInput } from "../SearchInput";
 import { SearchOutput } from "../SearchOutput";
@@ -10,8 +10,7 @@ interface Props {
 }
 
 const KeyboardSearch: NextPage<Props> = (props) => {
-  const ctxValue = useContext(AppContext);
-  const keyboardsRaw = ctxValue!.data;
+  const keyboardsRaw = useKeyboard((state) => state.data);
 
   const [searchInput, setSearchInput] = useState<string>("");
   const [filteredKeyboards, setFilteredKeyboards] = useState<Keyboard[]>([]);
@@ -21,10 +20,9 @@ const KeyboardSearch: NextPage<Props> = (props) => {
     else if (searchInput.length >= 1) {
       const newFilteredKeyboard = Object.values(keyboardsRaw).filter(
         (keyboard) =>
-          keyboard.name
-            .toLocaleLowerCase()
-            .includes(searchInput.toLocaleLowerCase())
+          keyboard.name.toLowerCase().includes(searchInput.toLocaleLowerCase())
       );
+
       setFilteredKeyboards(newFilteredKeyboard);
     } else {
       setFilteredKeyboards([]);
