@@ -3,8 +3,13 @@ import { Footer } from "../components/layouts/Footer";
 import { Menu } from "../components/layouts/Menu";
 import { Meta } from "../components/layouts/Meta";
 import { KeyboardSearch } from "../components/pages/search/KeyboardSearch";
+import { Loading } from "../components/ui/Loading";
+import useKeyboard from "../store/store";
 
 const Home: NextPage = () => {
+  const isLoading = useKeyboard((state) => state.isLoading);
+  if (isLoading) return <Loading />;
+
   return (
     <>
       <Meta />

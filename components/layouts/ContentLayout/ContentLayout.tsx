@@ -1,4 +1,6 @@
 import type { NextPage } from "next";
+import useKeyboard from "../../../store/store";
+import { Loading } from "../../ui/Loading";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
 import { Meta } from "../Meta";
@@ -8,6 +10,9 @@ interface Props {
 }
 
 const ContentLayout: NextPage<Props> = ({ children }) => {
+  const isLoading = useKeyboard((state) => state.isLoading);
+  if (isLoading) return <Loading />;
+
   return (
     <main className="bg-white dark:bg-gray-900">
       <Meta />
