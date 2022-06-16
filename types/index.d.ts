@@ -1,5 +1,5 @@
 export type Keyboard = {
-  slug?: string;
+  slug: string;
   name: string;
   keys: string;
   material: string;
@@ -18,8 +18,8 @@ export type Keyboard = {
   software: string;
   stabilizer: string;
   warranty: string;
-  prices?: string;
-  imageUrl?: string;
+  prices: string;
+  imageUrl: string;
 };
 
 export type KeyboardLooseObjects = {

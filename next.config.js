@@ -5,13 +5,6 @@ const nextConfig = {
     domains: ["images.tokopedia.net"],
   },
   webpack: (config) => {
-    // config.node = {
-    //   fs: "empty",
-    //   child_process: "empty",
-    //   net: "empty",
-    //   dns: "empty",
-    //   tls: "empty",
-    // };
     config.resolve.fallback = {
       fs: false,
       path: false,
@@ -22,6 +15,16 @@ const nextConfig = {
     };
     return config;
   },
+  // reactStrictMode: false, // Ref: https://stackoverflow.com/questions/71835580/useeffect-being-called-twice-in-nextjs-typescript-app
+
+  // config.node = {
+  //   fs: "empty",
+  //   child_process: "empty",
+  //   net: "empty",
+  //   dns: "empty",
+  //   tls: "empty",
+  // };
+
   // webpack: (config, { isServer }) => {
   //   if (!isServer) {
   //     config.resolve.fallback = {

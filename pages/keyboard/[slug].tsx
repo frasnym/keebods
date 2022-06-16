@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { ContentLayout } from "../../components/layouts/ContentLayout";
 import { DetailTable } from "../../components/pages/table/DetailTable";
+import { Loading } from "../../components/ui/Loading";
 import useKeyboard from "../../store/store";
 
 const KeyboardDetail: NextPage = () => {
@@ -9,7 +10,7 @@ const KeyboardDetail: NextPage = () => {
   const keyboards = useKeyboard((state) => state.data);
 
   const keyboard = keyboards[slug];
-  if (!keyboard) return <p>Keyboard not found</p>;
+  if (!keyboard) return <Loading />;
 
   return (
     <ContentLayout>
