@@ -6,9 +6,19 @@ import { InputHelper } from "../InputHelper";
 import { FormSelect } from "../input/FormSelect";
 
 const FormGroup: NextPage<FormGroupProps> = (props) => {
+  const isRequired: boolean = props.input
+    ? props.input.required
+    : props.select
+    ? props.select.required
+    : false;
+
   return (
     <div className="mb-6">
-      <FormLabel {...props.label} inputKey={props.inputKey} />
+      <FormLabel
+        {...props.label}
+        isRequired={isRequired}
+        inputKey={props.inputKey}
+      />
       {props.input ? (
         <FormInput {...props.input} inputKey={props.inputKey} />
       ) : null}
