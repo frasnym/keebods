@@ -22,13 +22,13 @@ export type Keyboard = {
   imageUrl?: string;
 };
 
-export type KeyboardsObject = {
+export type KeyboardLooseObjects = {
   [key: string]: Keyboard;
 };
 
-export interface AppContextInterface {
+export interface KeyboardSheetData {
   header: string[];
-  data: KeyboardsObject;
+  data: KeyboardLooseObjects;
 }
 
 export interface FormGroupProps {
