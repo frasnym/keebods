@@ -17,6 +17,7 @@ const DetailTable: NextPage<Props> = (props) => {
   const kbCopy: Partial<Keyboard> = { ...props.keyboard };
   delete kbCopy.prices;
   delete kbCopy.imageUrl;
+  delete kbCopy.slug;
 
   return (
     <>
